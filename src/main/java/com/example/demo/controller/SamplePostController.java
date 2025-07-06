@@ -57,4 +57,10 @@ public class SamplePostController {
         log.info("sample post list");
         return samplePostRepository.findAll();
     }
+    @GetMapping("/sample_post/delete")
+    public void deleteSamplePost(@RequestBody Long postId) {
+        log.info("sample post delete id is {}", postId);
+
+        samplePostRepository.deleteById(postId);
+    }
 }
