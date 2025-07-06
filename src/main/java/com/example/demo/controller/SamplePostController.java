@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.controller.request.FindSamplePostRequest;
 import com.example.demo.controller.request.SamplePostRequest;
+import com.example.demo.controller.request.UpdateSamplePostRequest;
 import com.example.demo.entity.SamplePost;
 import com.example.demo.repository.SamplePostRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -62,5 +63,22 @@ public class SamplePostController {
         log.info("sample post delete id is {}", postId);
 
         samplePostRepository.deleteById(postId);
+    }
+    @PostMapping("/sample_post/update")
+    public SamplePost updateSamplePost(@RequestBody UpdateSamplePostRequest request) {
+        log.info("sample post update id is {}", request.getPostId());
+
+        Long postId = request.getPostId();
+        Optional<SamplePost> maybeSamplePost = samplePostRepository.findById(postId);
+
+        if(maybeSamplePost.isEmpty()){
+            return null;
+        }
+        SamplePost foundSamplePost = maybeSamplePost.get();
+        foundSamplePost.setTitle(request.getTitle());
+        foundSamplePost.setWriter(request.getWriter());
+        foundSamplePost.setContent(request.getContent());
+
+        return samplePostRepository.save(foundSamplePost);
     }
 }
