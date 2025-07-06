@@ -6,10 +6,10 @@ import com.example.demo.entity.SamplePost;
 import com.example.demo.repository.SamplePostRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -34,6 +34,27 @@ public class SamplePostController {
 
     @PostMapping("/sample_post/find")
     public SamplePost findSamplePost(@RequestBody FindSamplePostRequest request) {
-    Long postId = request.getPostId()
+        Long postId = request.getPostId();
+        Optional<SamplePost> maybeSamplePost = samplePostRepository.findById(postId);
+
+        if(maybeSamplePost.isEmpty()){
+            return null;
+        }
+        return maybeSamplePost.get();
+    }
+    @GetMapping("/sample_post/read/{id}")
+    public SamplePost readSamplePost(@PathVariable Long id) {
+        log.info("sample post read id is {}", id);
+        Optional<SamplePost> maybeSamplePost = samplePostRepository.findById(id);
+
+        if(maybeSamplePost.isEmpty()){
+            return null;
+        }
+        return maybeSamplePost.get();
+    }
+    @GetMapping("/sample_post/list")
+    public List<SamplePost> listSamplePost() {
+        log.info("sample post list");
+        return samplePostRepository.findAll();
     }
 }

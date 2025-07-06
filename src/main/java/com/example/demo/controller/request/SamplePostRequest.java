@@ -18,13 +18,3 @@ public class SamplePostRequest {
     }
 }
 
-public class FindSamplePostRequest {
-    Long postId;
-}
-public class UpdateSamplePostRequest {
-    Long postId;
-    String title;
-    String writer;
-    String content;
-
-}
