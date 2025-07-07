@@ -2,6 +2,13 @@
 spring:
   application:
     name: demo
+    #실제 Swagger는 API를 어떻게 사용해야 하는지 각종 테스트까지 가능함
+    #그렇기 때문에 개발 버전에서만 사용하고 상품화 버전에서는 사용하면 안됨
+    #해커가 악용할 가능성이 많음
+    #이를 고려하여 개발 버전에서는 아래와 같이 active: dev 를 배치하여
+    #현재 구성에 개발 버전임을 명시함
+  profiles:
+    active: dev
 
 
   h2:
@@ -31,3 +38,30 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: update
+
+# YAML 구조에서는 "---"를 새로운 문서으 시작을 알리는 용도로 사용합니다
+# 하나의 YAML 파일 내에 여러개의 YAML 문서를 구성할 수 있는데
+#이 때 문서의 구분자로 활용하는 것이 "---"입니다
+---
+
+# Swagger 설정 : dev 환경일 때만 Swagger켜기
+spring:
+  config:
+    activate:
+      on-profile: dev
+      #activat.on-profile: dev를 지정함으로서
+      #Swagger 설정이 dev 프로파일인 경우에만 활성화 되도록 만들었습니다
+
+#Swagger 라이브러리의 본체
+#눈에 보기 좋게 ui구성이 true로 되어 있으며
+#그 경로가 /swagger-ui.html이라고 합니다
+#결론적으로 위 경로로 GET요청을 보내면 Swagger구성을 볼 수 있다는 뜻입니다
+#그래서 실제로는 Swagger만 사용하지 않고 TDD 구성 방법을 함께 적용하여 사용합니다
+#TDD구성 방법은 옵셔널(선택적)한 부분이기에 신경 쓰지 않아도 괜찮습니다
+#API Documents도 true 설정하여 문서화 작업도 자동화 해줍니다
+springdoc:
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+  api-docs:
+    enabled: true

@@ -8,6 +8,8 @@ import com.example.demo.entity.Post;
 import com.example.demo.repository.PostRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.hateoas.EntityModel;
+//import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -142,5 +144,30 @@ public class PostController {
 
         return postRepository.save(foundPost);
     }
+
+
+    /*
+
+    @GetMapping("/post/{id}")
+    //EntityModel은 Spring HATEOAS에서 제공하는 클래스입니다
+    //실제 데이터와 링크 정보를 출력해줌
+    //결론적으로 Post객체를 리턴하면서 실제 자신의 링크 주소를 함께 리턴해줌
+    public EntityModel<Post> getPost(@PathVariable Long id){
+        Post post = postRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("Post not found"));
+
+        return EntityModel.of(
+                post,
+                //WebMvcLinkBuilder.LinkTo() 의 경우 링크 생성을 지원함
+                WebMvcLinkBuilder.linkTo(
+                        //이것은 실제 메서드 실행이 아니라 이 매서드 동작 경로는 이러이러하다라고 표현해줌
+                        WebMvcLinkBuilder.methodOn(PostController.class).getPost(id)
+                        //withSelfRel() 이라는 것을 통해 API명세를 전달함
+                ).withSelfRel()
+        );
+    }
+
+     */
+
 
 }
