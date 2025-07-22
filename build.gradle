@@ -27,9 +27,9 @@ dependencies {
     //'org.springframework.boot:spring-boot-starter-data-jpa' 는
     //Spring Framework에서 제공하는 JPA라이브러리입니다
     //이 라이브러리를 사용하기 위해 아래와 같이 implementation을 작성해서 구성해줘야 합니다
-    //implementation의 의민는 이 라이브러리를 사용할 때
+    //implementation의 의미는 이 라이브러리를 사용할 때
     //컴파일 시에도 라이브러리를 사용해서 다른 코드가 참조할 수 있게 만들어 주세요
-    //컴파일 시 라는 것의 의미는 Java컴파일러의 구동 방식과 롼련이 있음
+    //컴파일 시 라는 것의 의미는 Java컴파일러의 구동 방식과 관련이 있음
     //기본적으로 Java코드는 JVM이라는 가상 머신이 있고
     //Java Compiler라는 녀석이 함께 구동하여 코드를 동작시키게 됩니다
     //JVM은 Java Compiler가 Java코드를 ByteCode라는 형태로 작성
